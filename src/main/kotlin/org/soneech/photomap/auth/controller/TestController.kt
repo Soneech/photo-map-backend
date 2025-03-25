@@ -1,4 +1,4 @@
-package org.soneech.photomap.auth.configuration
+package org.soneech.photomap.auth.controller
 
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Roles
 import org.soneech.photomap.data.jooq.service.RolesDataService
