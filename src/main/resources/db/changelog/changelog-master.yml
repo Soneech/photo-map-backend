@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role-table
+      author: Soneech
+      changes:
+        - sqlFile:
+            path: sql/25-03/create-roles-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: create-users-table
+      author: Soneech
+      changes:
+        - sqlFile:
+            path: sql/25-03/create-users-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: insert-default-roles
+      author: Soneech
+      changes:
+        - sqlFile:
+            path: sql/25-03/insert-default-roles.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: add-tag-1.0.0
+      author: Soneech
+      changes:
+        - tagDatabase:
+            tag: v1.0.0

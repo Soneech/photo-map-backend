@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: photo-map-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/photo_map
+    username: postgres
+    password: postgres
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.yml
+
+server:
+  port: 8080
