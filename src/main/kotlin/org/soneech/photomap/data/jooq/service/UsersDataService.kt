@@ -13,16 +13,24 @@ class UsersDataService(
 
     fun getById(id: Long): Users {
         return usersRepository.getById(id)
-            ?: throw NotFoundException("User with id = $id not found")
+            ?: throw NotFoundException("Пользователь с id = $id не найден")
     }
 
     fun getByEmail(email: String): Users {
         return usersRepository.getByEmail(email)
-            ?: throw NotFoundException("User with email = $email not found")
+            ?: throw NotFoundException("Пользователь с email = $email не найден")
+    }
+
+    fun getAll(): Set<Users> {
+        return usersRepository.getAll()
+    }
+
+    fun existsByEmail(email: String): Boolean {
+        return usersRepository.getByEmail(email) != null
     }
 
     fun create(user: Users): Users {
         return usersRepository.create(user)
-            ?: throw CreationException("Cannot create user with data: $user")
+            ?: throw CreationException("Ошибка создания пользователя с данными: $user")
     }
 }

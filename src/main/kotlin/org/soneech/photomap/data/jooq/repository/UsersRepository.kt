@@ -23,6 +23,12 @@ class UsersRepository(
             .fetchOneInto(Users::class.java)
     }
 
+    fun getAll(): Set<Users> {
+        return dsl.selectFrom(USERS)
+            .fetchInto(Users::class.java)
+            .toSet()
+    }
+
     fun create(user: Users): Users? {
         val record = UsersRecord(user)
 
