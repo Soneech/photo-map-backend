@@ -23,10 +23,14 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+	// logging
+	implementation("io.github.microutils:kotlin-logging:3.0.5")
+	implementation("ch.qos.logback:logback-classic:1.5.18")
+
 	// core
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	implementation("jakarta.validation:jakarta.validation-api:3.1.1")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	// jooq
 	implementation("org.springframework.boot:spring-boot-starter-jooq")
@@ -35,6 +39,7 @@ dependencies {
 
 	// security
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("com.auth0:java-jwt:4.5.0")
 
 	// database
 	runtimeOnly("org.postgresql:postgresql")

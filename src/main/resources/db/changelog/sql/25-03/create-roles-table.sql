@@ -1,6 +1,0 @@
---liquibase formatted sql
-
-CREATE TABLE Roles (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL
-);

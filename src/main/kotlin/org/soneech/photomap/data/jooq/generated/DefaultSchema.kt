@@ -34,11 +34,6 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     }
 
     /**
-     * The table <code>ROLES</code>.
-     */
-    val ROLES: org.soneech.photomap.`data`.jooq.generated.tables.Roles get() = org.soneech.photomap.`data`.jooq.generated.tables.Roles.ROLES
-
-    /**
      * The table <code>USERS</code>.
      */
     val USERS: org.soneech.photomap.`data`.jooq.generated.tables.Users get() = org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS
@@ -46,7 +41,6 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     override fun getCatalog(): Catalog = org.soneech.photomap.`data`.jooq.generated.DefaultCatalog.DEFAULT_CATALOG
 
     override fun getTables(): List<Table<*>> = listOf(
-        org.soneech.photomap.`data`.jooq.generated.tables.Roles.ROLES,
         org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS
     )
 }

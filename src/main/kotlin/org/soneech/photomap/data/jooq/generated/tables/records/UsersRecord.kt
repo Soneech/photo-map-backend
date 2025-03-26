@@ -54,10 +54,11 @@ open class UsersRecord() : UpdatableRecordImpl<UsersRecord>(org.soneech.photomap
         get(): String? = get(3) as String?
 
     @get:NotNull
-    open var roleId: Long?
+    @get:Size(max = 50)
+    open var role: String?
         set(value): Unit = set(4, value)
     @NotNull
-        get(): Long? = get(4) as Long?
+        get(): String? = get(4) as String?
 
     // -------------------------------------------------------------------------
     // Primary key information
@@ -68,12 +69,12 @@ open class UsersRecord() : UpdatableRecordImpl<UsersRecord>(org.soneech.photomap
     /**
      * Create a detached, initialised UsersRecord
      */
-    constructor(id: Long? = null, name: String? = null, email: String? = null, password: String? = null, roleId: Long? = null): this() {
+    constructor(id: Long? = null, name: String? = null, email: String? = null, password: String? = null, role: String? = null): this() {
         this.id = id
         this.name = name
         this.email = email
         this.password = password
-        this.roleId = roleId
+        this.role = role
         resetChangedOnNotNull()
     }
 
@@ -86,7 +87,7 @@ open class UsersRecord() : UpdatableRecordImpl<UsersRecord>(org.soneech.photomap
             this.name = value.name
             this.email = value.email
             this.password = value.password
-            this.roleId = value.roleId
+            this.role = value.role
             resetChangedOnNotNull()
         }
     }

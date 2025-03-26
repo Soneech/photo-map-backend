@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/test")
-class TestController{
+@RequestMapping("/users")
+class UsersController {
+
     @GetMapping
-    fun test(): String {
-        return "test"
+    fun getAllUsers(): String { // test security
+        return "users"
     }
 }

@@ -7,11 +7,6 @@ package org.soneech.photomap.`data`.jooq.generated.tables.references
 
 
 /**
- * The table <code>ROLES</code>.
- */
-val ROLES: org.soneech.photomap.`data`.jooq.generated.tables.Roles = org.soneech.photomap.`data`.jooq.generated.tables.Roles.ROLES
-
-/**
  * The table <code>USERS</code>.
  */
 val USERS: org.soneech.photomap.`data`.jooq.generated.tables.Users = org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS

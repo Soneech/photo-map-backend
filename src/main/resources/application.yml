@@ -9,5 +9,12 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/changelog-master.yml
 
+app:
+  jwt:
+    secret: 123456789
+    subject: photo-map-backend
+    issuer: Soneech
+    ttl: 3600
+
 server:
   port: 8080

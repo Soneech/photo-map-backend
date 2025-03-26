@@ -35,7 +35,8 @@ data class Users(
     @get:Size(max = 1000)
     var password: String? = null,
     @get:NotNull
-    var roleId: Long? = null
+    @get:Size(max = 50)
+    var role: String? = null
 ): Serializable {
 
 
@@ -71,11 +72,11 @@ data class Users(
         }
         else if (this.password != o.password)
             return false
-        if (this.roleId == null) {
-            if (o.roleId != null)
+        if (this.role == null) {
+            if (o.role != null)
                 return false
         }
-        else if (this.roleId != o.roleId)
+        else if (this.role != o.role)
             return false
         return true
     }
@@ -87,7 +88,7 @@ data class Users(
         result = prime * result + (if (this.name == null) 0 else this.name.hashCode())
         result = prime * result + (if (this.email == null) 0 else this.email.hashCode())
         result = prime * result + (if (this.password == null) 0 else this.password.hashCode())
-        result = prime * result + (if (this.roleId == null) 0 else this.roleId.hashCode())
+        result = prime * result + (if (this.role == null) 0 else this.role.hashCode())
         return result
     }
 
@@ -98,7 +99,7 @@ data class Users(
         sb.append(", ").append(name)
         sb.append(", ").append(email)
         sb.append(", ").append(password)
-        sb.append(", ").append(roleId)
+        sb.append(", ").append(role)
 
         sb.append(")")
         return sb.toString()
