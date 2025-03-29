@@ -4,11 +4,13 @@ import org.soneech.photomap.auth.dto.request.auth.AuthRequest
 import org.soneech.photomap.auth.dto.request.auth.RegistrationRequest
 import org.soneech.photomap.auth.dto.response.auth.AuthUserResponse
 import org.soneech.photomap.auth.dto.response.auth.RegisteredUserResponse
-import org.soneech.photomap.auth.exception.ExistenceException
+import org.soneech.photomap.auth.exception.AlreadyExistsException
+import org.soneech.photomap.auth.exception.AuthProcessException
 import org.soneech.photomap.auth.jwt.JwtUtil
 import org.soneech.photomap.auth.model.Roles
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Users
 import org.soneech.photomap.data.jooq.service.UsersDataService
+import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -23,15 +25,18 @@ class AuthService(
 ) {
 
     fun authenticate(request: AuthRequest): AuthUserResponse {
-        if (!usersDataService.existsByEmail(request.email)) {
-            throw ExistenceException("Пользователь с email ${request.email} не найден")
-        }
-
         val token = UsernamePasswordAuthenticationToken(
             request.email,
             request.password
         )
-        authenticationManager.authenticate(token)
+        try {
+            authenticationManager.authenticate(token)
+        } catch (ex: Exception) {
+            throw AuthProcessException(
+                httpStatus = HttpStatus.UNAUTHORIZED,
+                message = "Неверная почта или пароль"
+            )
+        }
 
         val jwt = jwtUtil.generateToken(request.email)
         return AuthUserResponse(jwt)
@@ -39,7 +44,7 @@ class AuthService(
 
     fun register(request: RegistrationRequest): RegisteredUserResponse {
         if (usersDataService.existsByEmail(request.email)) {
-            throw ExistenceException("Пользователь с email ${request.email} уже существует")
+            throw AlreadyExistsException("Пользователь с email ${request.email} уже существует")
         }
         val user = request.toUser()
         val registeredUser = usersDataService.create(user)

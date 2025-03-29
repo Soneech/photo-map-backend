@@ -1,9 +1,8 @@
 package org.soneech.photomap.auth.controller.handler
 
-import org.soneech.photomap.auth.dto.response.errors.BadParamsResponse
-import org.soneech.photomap.auth.dto.response.errors.BadRequestResponse
+import org.soneech.photomap.auth.dto.response.errors.ErrorResponse
 import org.soneech.photomap.auth.exception.AuthProcessException
-import org.soneech.photomap.auth.exception.ExistenceException
+import org.soneech.photomap.auth.exception.AlreadyExistsException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -13,29 +12,30 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class AuthExceptionHandler {
 
     @ExceptionHandler
-    fun handleAuthProcessException(exception: AuthProcessException): ResponseEntity<BadParamsResponse> {
-        val response = exception.toBadParamsResponse()
+    fun handleAuthProcessException(exception: AuthProcessException): ResponseEntity<ErrorResponse> {
+        val response = exception.toErrorResponse()
         return ResponseEntity
             .status(exception.httpStatus)
             .body(response)
     }
 
     @ExceptionHandler
-    fun handleExistenceException(exception: ExistenceException): ResponseEntity<BadRequestResponse> {
-        val response = exception.toBadRequestResponse()
+    fun handleExistenceException(exception: AlreadyExistsException): ResponseEntity<ErrorResponse> {
+        val status = HttpStatus.CONFLICT
+        val response = exception.toErrorResponse(status)
         return ResponseEntity
-            .badRequest()
+            .status(status)
             .body(response)
     }
 
-    fun AuthProcessException.toBadParamsResponse() = BadParamsResponse(
+    fun AuthProcessException.toErrorResponse() = ErrorResponse(
         code = httpStatus.value().toString(),
         message = message,
-        fieldsErrors = fieldsErrors,
+        errors = errors
     )
 
-    fun ExistenceException.toBadRequestResponse() = BadRequestResponse(
-        code = HttpStatus.BAD_REQUEST.value().toString(),
+    fun AlreadyExistsException.toErrorResponse(status: HttpStatus) = ErrorResponse(
+        code = status.value().toString(),
         message = message,
     )
 }

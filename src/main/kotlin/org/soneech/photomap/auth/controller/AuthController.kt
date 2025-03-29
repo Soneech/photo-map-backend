@@ -32,7 +32,7 @@ class AuthController(
         }
 
         val registeredUserResponse = authService.register(request)
-        return ResponseEntity.ok(registeredUserResponse)
+        return ResponseEntity.status(HttpStatus.CREATED).body(registeredUserResponse)
     }
 
     @PostMapping("/login")

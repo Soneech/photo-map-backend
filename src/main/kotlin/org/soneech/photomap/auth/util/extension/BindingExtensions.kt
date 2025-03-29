@@ -2,15 +2,13 @@ package org.soneech.photomap.auth.util.extension
 
 import org.springframework.validation.BindingResult
 
-fun BindingResult.getFieldsErrors(): Map<String, Set<String>> {
-    val fieldsAndErrors = mutableMapOf<String, MutableSet<String>>()
+fun BindingResult.getFieldsErrors(): Set<String> {
+    val fieldsErrors = mutableSetOf<String>()
 
     fieldErrors.forEach { fieldError ->
-        val field = fieldError.field
         val message = fieldError.defaultMessage ?: "Неизвестная ошибка"
-
-        fieldsAndErrors.computeIfAbsent(field) { mutableSetOf() }.add(message)
+        fieldsErrors.add(message)
     }
 
-    return fieldsAndErrors
+    return fieldsErrors
 }
