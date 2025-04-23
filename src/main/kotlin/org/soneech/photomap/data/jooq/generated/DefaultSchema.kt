@@ -34,6 +34,41 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     }
 
     /**
+     * The table <code>CATEGORY</code>.
+     */
+    val CATEGORY: org.soneech.photomap.`data`.jooq.generated.tables.Category get() = org.soneech.photomap.`data`.jooq.generated.tables.Category.CATEGORY
+
+    /**
+     * The table <code>COMMENT</code>.
+     */
+    val COMMENT: org.soneech.photomap.`data`.jooq.generated.tables.Comment get() = org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT
+
+    /**
+     * The table <code>CONTENT_LINK</code>.
+     */
+    val CONTENT_LINK: org.soneech.photomap.`data`.jooq.generated.tables.ContentLink get() = org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.CONTENT_LINK
+
+    /**
+     * The table <code>MARK</code>.
+     */
+    val MARK: org.soneech.photomap.`data`.jooq.generated.tables.Mark get() = org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK
+
+    /**
+     * The table <code>MARK_CATEGORY</code>.
+     */
+    val MARK_CATEGORY: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory get() = org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY
+
+    /**
+     * The table <code>MARK_TAG</code>.
+     */
+    val MARK_TAG: org.soneech.photomap.`data`.jooq.generated.tables.MarkTag get() = org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG
+
+    /**
+     * The table <code>TAG</code>.
+     */
+    val TAG: org.soneech.photomap.`data`.jooq.generated.tables.Tag get() = org.soneech.photomap.`data`.jooq.generated.tables.Tag.TAG
+
+    /**
      * The table <code>USERS</code>.
      */
     val USERS: org.soneech.photomap.`data`.jooq.generated.tables.Users get() = org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS
@@ -41,6 +76,13 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     override fun getCatalog(): Catalog = org.soneech.photomap.`data`.jooq.generated.DefaultCatalog.DEFAULT_CATALOG
 
     override fun getTables(): List<Table<*>> = listOf(
+        org.soneech.photomap.`data`.jooq.generated.tables.Category.CATEGORY,
+        org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT,
+        org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.CONTENT_LINK,
+        org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK,
+        org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY,
+        org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG,
+        org.soneech.photomap.`data`.jooq.generated.tables.Tag.TAG,
         org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS
     )
 }
