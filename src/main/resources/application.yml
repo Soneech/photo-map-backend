@@ -18,3 +18,16 @@ app:
 
 server:
   port: 8080
+
+cloud:
+  aws:
+    s3:
+      baseUrl: https://storage.yandexcloud.net/
+      secretKeyId: ${SECRET_KEY_ID}
+      secretKey: ${SECRET_KEY}
+      region: ru-central1
+      buckets:
+        photo:
+          name: map-photos
+        video:
+          name: map-videos

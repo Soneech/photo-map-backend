@@ -45,6 +45,10 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 	implementation("org.liquibase:liquibase-core")
 
+	// aws
+	implementation("software.amazon.awssdk:aws-sdk-java:2.29.33")
+	implementation("software.amazon.awssdk:apache-client:2.29.33")
+
 	// management
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
