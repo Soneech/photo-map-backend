@@ -25,7 +25,6 @@ import javax.annotation.processing.Generated
 )
 @Suppress("UNCHECKED_CAST")
 data class Comment(
-    @get:NotNull
     var id: Long? = null,
     @get:NotNull
     var userId: Long? = null,

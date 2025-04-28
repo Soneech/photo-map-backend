@@ -11,6 +11,7 @@ import kotlin.collections.Collection
 import org.jooq.Condition
 import org.jooq.Field
 import org.jooq.ForeignKey
+import org.jooq.Identity
 import org.jooq.InverseForeignKey
 import org.jooq.Name
 import org.jooq.Path
@@ -78,7 +79,7 @@ open class Tag(
     /**
      * The column <code>TAG.ID</code>.
      */
-    val ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.TagRecord, Long?> = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false), this, "")
+    val ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.TagRecord, Long?> = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false).identity(true), this, "")
 
     /**
      * The column <code>TAG.NAME</code>.
@@ -124,6 +125,7 @@ open class Tag(
         override fun `as`(alias: Table<*>): TagPath = TagPath(alias.qualifiedName, this)
     }
     override fun getSchema(): Schema? = if (aliased()) null else org.soneech.photomap.`data`.jooq.generated.DefaultSchema.DEFAULT_SCHEMA
+    override fun getIdentity(): Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.TagRecord, Long?> = super.getIdentity() as Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.TagRecord, Long?>
     override fun getPrimaryKey(): UniqueKey<org.soneech.photomap.`data`.jooq.generated.tables.records.TagRecord> = org.soneech.photomap.`data`.jooq.generated.keys.CONSTRAINT_1
 
     private lateinit var _markTag: org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MarkTagPath

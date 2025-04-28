@@ -44,9 +44,9 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     val COMMENT: org.soneech.photomap.`data`.jooq.generated.tables.Comment get() = org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT
 
     /**
-     * The table <code>CONTENT_LINK</code>.
+     * The table <code>FILE_DATA</code>.
      */
-    val CONTENT_LINK: org.soneech.photomap.`data`.jooq.generated.tables.ContentLink get() = org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.CONTENT_LINK
+    val FILE_DATA: org.soneech.photomap.`data`.jooq.generated.tables.FileData get() = org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA
 
     /**
      * The table <code>MARK</code>.
@@ -78,7 +78,7 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     override fun getTables(): List<Table<*>> = listOf(
         org.soneech.photomap.`data`.jooq.generated.tables.Category.CATEGORY,
         org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT,
-        org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.CONTENT_LINK,
+        org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA,
         org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK,
         org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY,
         org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG,

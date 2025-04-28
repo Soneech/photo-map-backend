@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 CREATE TABLE Comment (
-    id BIGINT NOT NULL PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
     user_id BIGINT NOT NULL,
     mark_id BIGINT NOT NULL,
     text TEXT NOT NULL,

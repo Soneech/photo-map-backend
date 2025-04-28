@@ -16,6 +16,7 @@ import org.jooq.Check
 import org.jooq.Condition
 import org.jooq.Field
 import org.jooq.ForeignKey
+import org.jooq.Identity
 import org.jooq.InverseForeignKey
 import org.jooq.Name
 import org.jooq.Path
@@ -83,7 +84,7 @@ open class Mark(
     /**
      * The column <code>MARK.ID</code>.
      */
-    val ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false), this, "")
+    val ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false).identity(true), this, "")
 
     /**
      * The column <code>MARK.USER_ID</code>.
@@ -164,6 +165,7 @@ open class Mark(
         override fun `as`(alias: Table<*>): MarkPath = MarkPath(alias.qualifiedName, this)
     }
     override fun getSchema(): Schema? = if (aliased()) null else org.soneech.photomap.`data`.jooq.generated.DefaultSchema.DEFAULT_SCHEMA
+    override fun getIdentity(): Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = super.getIdentity() as Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?>
     override fun getPrimaryKey(): UniqueKey<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord> = org.soneech.photomap.`data`.jooq.generated.keys.CONSTRAINT_2
     override fun getReferences(): List<ForeignKey<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, *>> = listOf(org.soneech.photomap.`data`.jooq.generated.keys.FK_MARK_USER)
 
@@ -197,20 +199,20 @@ open class Mark(
     val comment: org.soneech.photomap.`data`.jooq.generated.tables.Comment.CommentPath
         get(): org.soneech.photomap.`data`.jooq.generated.tables.Comment.CommentPath = comment()
 
-    private lateinit var _contentLink: org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.ContentLinkPath
+    private lateinit var _fileData: org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath
 
     /**
-     * Get the implicit to-many join path to the <code>CONTENT_LINK</code> table
+     * Get the implicit to-many join path to the <code>FILE_DATA</code> table
      */
-    fun contentLink(): org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.ContentLinkPath {
-        if (!this::_contentLink.isInitialized)
-            _contentLink = org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.ContentLinkPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_CONTENT_LINK_MARK.inverseKey)
+    fun fileData(): org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath {
+        if (!this::_fileData.isInitialized)
+            _fileData = org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_FILE_DATA_MARK.inverseKey)
 
-        return _contentLink;
+        return _fileData;
     }
 
-    val contentLink: org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.ContentLinkPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.ContentLinkPath = contentLink()
+    val fileData: org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath
+        get(): org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath = fileData()
 
     private lateinit var _markCategory: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath
 

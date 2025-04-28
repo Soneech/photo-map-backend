@@ -24,7 +24,6 @@ import javax.annotation.processing.Generated
 )
 @Suppress("UNCHECKED_CAST")
 data class Tag(
-    @get:NotNull
     var id: Long? = null,
     @get:NotNull
     @get:Size(max = 255)

@@ -26,7 +26,6 @@ import javax.annotation.processing.Generated
 )
 @Suppress("UNCHECKED_CAST")
 data class Mark(
-    @get:NotNull
     var id: Long? = null,
     @get:NotNull
     var userId: Long? = null,

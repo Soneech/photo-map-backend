@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 CREATE TABLE Mark (
-    id BIGINT NOT NULL PRIMARY KEY,
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id BIGINT NOT NULL,
     latitude NUMERIC(9,6) NOT NULL CHECK (latitude BETWEEN -90 AND 90),
     longitude NUMERIC(9,6) NOT NULL CHECK (longitude BETWEEN -180 AND 180),

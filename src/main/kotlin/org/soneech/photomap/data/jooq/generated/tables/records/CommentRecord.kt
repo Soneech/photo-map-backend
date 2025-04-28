@@ -29,10 +29,9 @@ import org.jooq.impl.UpdatableRecordImpl
 @Suppress("UNCHECKED_CAST")
 open class CommentRecord() : UpdatableRecordImpl<CommentRecord>(org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT) {
 
-    @get:NotNull
     open var id: Long?
         set(value): Unit = set(0, value)
-    @NotNull
+    @Nullable
         get(): Long? = get(0) as Long?
 
     @get:NotNull

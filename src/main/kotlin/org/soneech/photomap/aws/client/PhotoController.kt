@@ -1,4 +1,4 @@
-package org.soneech.photomap.aws.controller
+package org.soneech.photomap.aws.client
 
 import org.soneech.photomap.aws.configuration.AwsProperties
 import org.springframework.http.HttpHeaders

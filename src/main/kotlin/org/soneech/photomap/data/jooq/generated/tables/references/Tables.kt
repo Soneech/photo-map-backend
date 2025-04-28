@@ -17,9 +17,9 @@ val CATEGORY: org.soneech.photomap.`data`.jooq.generated.tables.Category = org.s
 val COMMENT: org.soneech.photomap.`data`.jooq.generated.tables.Comment = org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT
 
 /**
- * The table <code>CONTENT_LINK</code>.
+ * The table <code>FILE_DATA</code>.
  */
-val CONTENT_LINK: org.soneech.photomap.`data`.jooq.generated.tables.ContentLink = org.soneech.photomap.`data`.jooq.generated.tables.ContentLink.CONTENT_LINK
+val FILE_DATA: org.soneech.photomap.`data`.jooq.generated.tables.FileData = org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA
 
 /**
  * The table <code>MARK</code>.

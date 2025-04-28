@@ -4,6 +4,7 @@
 package org.soneech.photomap.`data`.jooq.generated.tables.records
 
 
+import jakarta.annotation.Nullable
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
@@ -26,10 +27,9 @@ import org.jooq.impl.UpdatableRecordImpl
 @Suppress("UNCHECKED_CAST")
 open class TagRecord() : UpdatableRecordImpl<TagRecord>(org.soneech.photomap.`data`.jooq.generated.tables.Tag.TAG) {
 
-    @get:NotNull
     open var id: Long?
         set(value): Unit = set(0, value)
-    @NotNull
+    @Nullable
         get(): Long? = get(0) as Long?
 
     @get:NotNull

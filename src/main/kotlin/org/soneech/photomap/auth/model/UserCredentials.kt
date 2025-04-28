@@ -4,7 +4,7 @@ import org.soneech.photomap.data.jooq.generated.tables.pojos.Users
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-class UserCredentials(private val user: Users) : UserDetails {
+class UserCredentials(val user: Users) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val role = Roles.valueOf(requireNotNull(user.role))
         return mutableListOf(role)
