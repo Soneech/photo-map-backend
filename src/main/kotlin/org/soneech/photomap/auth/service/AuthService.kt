@@ -1,9 +1,9 @@
 package org.soneech.photomap.auth.service
 
-import org.soneech.photomap.auth.dto.request.auth.AuthRequest
-import org.soneech.photomap.auth.dto.request.auth.RegistrationRequest
-import org.soneech.photomap.auth.dto.response.auth.AuthUserResponse
-import org.soneech.photomap.auth.dto.response.auth.RegisteredUserResponse
+import org.soneech.photomap.auth.dto.request.AuthRequest
+import org.soneech.photomap.auth.dto.request.RegistrationRequest
+import org.soneech.photomap.auth.dto.response.AuthUserResponse
+import org.soneech.photomap.auth.dto.response.RegisteredUserResponse
 import org.soneech.photomap.auth.exception.AlreadyExistsException
 import org.soneech.photomap.auth.exception.AuthProcessException
 import org.soneech.photomap.auth.jwt.JwtUtil

@@ -22,6 +22,10 @@ class MarkDataService (
     private val aws: AwsProperties,
 ){
 
+    fun getAll(): List<Mark> {
+        return markRepository.getAll()
+    }
+
     fun create(mark: Mark, photos: List<MultipartFile>?, videos: List<MultipartFile>?): Mark {
         logger.info("Start creating mark")
 

@@ -19,7 +19,8 @@ class MarkRepository(
             .fetchOneInto(Mark::class.java)
     }
 
-    fun createRelation() {
-
+    fun getAll(): List<Mark> {
+        return dsl.selectFrom(MARK)
+            .fetchInto(Mark::class.java)
     }
 }

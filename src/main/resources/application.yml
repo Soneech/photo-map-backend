@@ -8,6 +8,10 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/changelog-master.yml
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 400MB
 
 app:
   jwt:
@@ -31,3 +35,6 @@ cloud:
           name: map-photos
         video:
           name: map-videos
+
+feature-flags:
+  useStorage: true

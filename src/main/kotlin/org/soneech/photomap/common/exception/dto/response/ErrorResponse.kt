@@ -1,4 +1,4 @@
-package org.soneech.photomap.auth.dto.response.errors
+package org.soneech.photomap.common.exception.dto.response
 
 data class ErrorResponse(
     val code: String,

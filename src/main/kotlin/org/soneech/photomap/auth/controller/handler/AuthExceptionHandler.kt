@@ -1,6 +1,6 @@
 package org.soneech.photomap.auth.controller.handler
 
-import org.soneech.photomap.auth.dto.response.errors.ErrorResponse
+import org.soneech.photomap.common.exception.dto.response.ErrorResponse
 import org.soneech.photomap.auth.exception.AuthProcessException
 import org.soneech.photomap.auth.exception.AlreadyExistsException
 import org.springframework.http.HttpStatus

@@ -1,4 +1,4 @@
-package org.soneech.photomap.auth.dto.response.auth
+package org.soneech.photomap.auth.dto.response
 
 data class RegisteredUserResponse(
     val id: Long,
