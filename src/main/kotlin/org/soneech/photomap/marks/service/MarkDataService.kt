@@ -4,9 +4,11 @@ import mu.KLogging
 import org.soneech.photomap.aws.client.FilesClient
 import org.soneech.photomap.aws.configuration.AwsProperties
 import org.soneech.photomap.data.jooq.exception.CreationException
+import org.soneech.photomap.data.jooq.exception.NotFoundException
 import org.soneech.photomap.data.jooq.generated.tables.pojos.FileData
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Mark
 import org.soneech.photomap.marks.model.FileContainer
+import org.soneech.photomap.marks.model.MarkFullData
 import org.soneech.photomap.marks.repository.FileDataRepository
 import org.soneech.photomap.marks.repository.MarkRepository
 import org.springframework.stereotype.Service
@@ -21,6 +23,29 @@ class MarkDataService (
     private val filesClient: FilesClient,
     private val aws: AwsProperties,
 ){
+
+    fun getFullDataById(id: Long): MarkFullData {
+        logger.info("Getting full mark data with id = $id")
+        val mark = getById(id)
+        val filesData = fileDataRepository.getAllByMarkId(id)
+
+        val markFullData: MarkFullData = if (filesData.isNotEmpty()) {
+            val files = filesClient.downloadFiles(filesData)
+            MarkFullData(
+                mark = mark,
+                photos = files.first,
+                videos = files.second,
+            )
+        } else {
+            MarkFullData(mark)
+        }
+
+        return markFullData
+    }
+    fun getById(id: Long): Mark {
+        return markRepository.getById(id)
+            ?: throw NotFoundException("Метка с id = $id не найдена")
+    }
 
     fun getAll(): List<Mark> {
         return markRepository.getAll()
@@ -72,7 +97,7 @@ class MarkDataService (
             FileContainer(
                 key = UUID.randomUUID().toString(),
                 bucket = bucket,
-                file = file,
+                multipartFile = file,
             )
         }
     }

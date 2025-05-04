@@ -23,4 +23,11 @@ class MarkRepository(
         return dsl.selectFrom(MARK)
             .fetchInto(Mark::class.java)
     }
+
+    fun getById(id: Long): Mark? {
+        return dsl
+            .selectFrom(MARK)
+            .where(MARK.ID.eq(id))
+            .fetchOneInto(Mark::class.java)
+    }
 }

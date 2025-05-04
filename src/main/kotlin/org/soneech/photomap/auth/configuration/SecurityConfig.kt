@@ -40,7 +40,7 @@ class SecurityConfig(
             .authorizeHttpRequests { requests ->
                 requests
                     .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/marks/**", "/marks/main").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/marks/**").permitAll()
                     .requestMatchers("/users").hasRole("ADMIN")
                     .anyRequest().hasAnyRole("USER", "ADMIN")
             }

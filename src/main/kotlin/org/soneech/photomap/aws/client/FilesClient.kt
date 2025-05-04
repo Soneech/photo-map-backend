@@ -1,14 +1,14 @@
 package org.soneech.photomap.aws.client
 
 import org.soneech.photomap.aws.configuration.AwsProperties
+import org.soneech.photomap.data.jooq.generated.tables.pojos.FileData
 import org.soneech.photomap.marks.model.FileContainer
-import org.springframework.http.HttpHeaders
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
+import java.lang.RuntimeException
 
 @Service
 class FilesClient(
@@ -18,39 +18,45 @@ class FilesClient(
 
     fun uploadFiles(files: List<FileContainer>) {
         for (fileContainer in files) {
+            val file = requireNotNull(fileContainer.multipartFile)
             val putObjectRequest = PutObjectRequest.builder()
                 .bucket(fileContainer.bucket)
                 .key(fileContainer.key)
-                .contentType(fileContainer.file.contentType)
+                .contentType(file.contentType)
                 .build()
 
-            s3Client.putObject(putObjectRequest, RequestBody.fromBytes(fileContainer.file.bytes))
+            s3Client.putObject(putObjectRequest, RequestBody.fromBytes(file.bytes))
         }
     }
 
-    fun downloadFiles(filesIds: List<String>): ResponseEntity<MutableList<ByteArray>> {
-        val files = mutableListOf<ByteArray>()
-        var contentType: String = ""
+    fun downloadFiles(filesData: List<FileData>): Pair<List<FileContainer>, List<FileContainer>> {
+        val photos = mutableListOf<FileContainer>()
+        val videos = mutableListOf<FileContainer>()
 
-        for (key in filesIds) {
+        for (fileData in filesData) {
+            val bucket = requireNotNull(fileData.bucketName)
+            val objectKey = requireNotNull(fileData.objectKey)
+
             val getObjectRequest = GetObjectRequest.builder()
-                .bucket(awsProperties.buckets.photo.name)
-                .key(key)
+                .bucket(bucket)
+                .key(objectKey)
                 .build()
 
             s3Client.getObject(getObjectRequest).use { inputStream ->
                 val data = inputStream.readAllBytes()
-                files.add(data)
-                contentType = inputStream.response().contentType()
+                val fileContainer = FileContainer(
+                    key = objectKey,
+                    bucket = bucket,
+                    bytes = data
+                )
+                when(bucket) {
+                    awsProperties.buckets.photo.name -> photos.add(fileContainer)
+                    awsProperties.buckets.video.name -> videos.add(fileContainer)
+                    else -> throw RuntimeException("Неизвестный бакет")
+                }
             }
         }
 
-        val headers = HttpHeaders().apply {
-            add(HttpHeaders.CONTENT_DISPOSITION, "inline")
-            add(HttpHeaders.CONTENT_TYPE, contentType)
-        }
-        return ResponseEntity.ok()
-            .headers(headers)
-            .body(files)
+        return Pair(photos, videos)
     }
 }

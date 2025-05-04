@@ -8,9 +8,13 @@ import org.soneech.photomap.data.jooq.generated.tables.pojos.Mark
 import org.soneech.photomap.marks.dto.request.MarkRequest
 import org.soneech.photomap.marks.dto.response.MarkResponse
 import org.soneech.photomap.marks.service.MarkDataService
+import org.springframework.core.io.ByteArrayResource
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.util.LinkedMultiValueMap
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
@@ -25,6 +29,40 @@ class MarkController(
     fun getMarksMainInfo(): ResponseEntity<List<MarkResponse>> {
         val response = markDataService.getAll().map { mark -> mark.toMarkResponse() }
         return ResponseEntity.ok(response)
+    }
+
+    @GetMapping("/{id}",  produces = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    fun getMarkById(@PathVariable("id") id: Long): ResponseEntity<LinkedMultiValueMap<String, HttpEntity<*>>> {
+        val markData = markDataService.getFullDataById(id)
+        val body = LinkedMultiValueMap<String, HttpEntity<*>>()
+
+        val jsonHeaders = HttpHeaders().apply {
+            contentType = MediaType.APPLICATION_JSON
+            setContentDispositionFormData("metadata", null)
+        }
+        body.add("metadata", HttpEntity(markData.mark, jsonHeaders))
+
+        markData.videos.forEach { fileContainer ->
+            val bytes = requireNotNull(fileContainer.bytes)
+            val resource = ByteArrayResource(bytes)
+            val headers = HttpHeaders().apply {
+                contentType = MediaType.parseMediaType("video/mp4")
+                setContentDispositionFormData("videos", fileContainer.key)
+            }
+            body.add("videos", HttpEntity(resource, headers))
+        }
+
+        markData.photos.forEach { fileContainer ->
+            val bytes = requireNotNull(fileContainer.bytes)
+            val resource = ByteArrayResource(bytes)
+            val headers = HttpHeaders().apply {
+                contentType = MediaType.IMAGE_JPEG
+                setContentDispositionFormData("photos", fileContainer.key)
+            }
+            body.add("photos", HttpEntity(resource, headers))
+        }
+
+        return ResponseEntity.ok().body(body)
     }
 
     @PostMapping("/create", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])

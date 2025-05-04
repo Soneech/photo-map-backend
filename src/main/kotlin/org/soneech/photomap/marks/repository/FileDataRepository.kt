@@ -26,4 +26,11 @@ class FileDataRepository(
         }
         return dsl.batchInsert(records).execute().size
     }
+
+    fun getAllByMarkId(markId: Long): List<FileData> {
+        return dsl
+            .selectFrom(FILE_DATA)
+            .where(FILE_DATA.MARK_ID.eq(markId))
+            .fetchInto(FileData::class.java)
+    }
 }
