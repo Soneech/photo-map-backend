@@ -7,6 +7,7 @@ import org.soneech.photomap.data.jooq.exception.CreationException
 import org.soneech.photomap.data.jooq.exception.NotFoundException
 import org.soneech.photomap.data.jooq.generated.tables.pojos.FileData
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Mark
+import org.soneech.photomap.data.jooq.service.UsersDataService
 import org.soneech.photomap.marks.model.FileContainer
 import org.soneech.photomap.marks.model.MarkFullData
 import org.soneech.photomap.marks.repository.FileDataRepository
@@ -20,6 +21,7 @@ import java.util.UUID
 class MarkDataService (
     private val markRepository: MarkRepository,
     private val fileDataRepository: FileDataRepository,
+    private val usersDataService: UsersDataService,
     private val filesClient: FilesClient,
     private val aws: AwsProperties,
 ){
@@ -28,16 +30,21 @@ class MarkDataService (
         logger.info("Getting full mark data with id = $id")
         val mark = getById(id)
         val filesData = fileDataRepository.getAllByMarkId(id)
+        val author = usersDataService.getById(requireNotNull(mark.userId))
 
         val markFullData: MarkFullData = if (filesData.isNotEmpty()) {
             val files = filesClient.downloadFiles(filesData)
             MarkFullData(
+                author = author,
                 mark = mark,
                 photos = files.first,
                 videos = files.second,
             )
         } else {
-            MarkFullData(mark)
+            MarkFullData(
+                author = author,
+                mark = mark,
+            )
         }
 
         return markFullData
@@ -73,7 +80,6 @@ class MarkDataService (
         val now = LocalDateTime.now()
         mark.createdAt = now
         mark.updatedAt = now
-        mark.likes = 0
 
         return markRepository.create(mark)
             ?: throw CreationException("Ошибка при создании метки с данными: $mark")

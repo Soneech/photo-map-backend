@@ -38,7 +38,6 @@ data class Mark(
     var name: String? = null,
     @get:Size(max = 1000000000)
     var description: String? = null,
-    var likes: Long? = null,
     var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null
 ): Serializable {
@@ -88,12 +87,6 @@ data class Mark(
         }
         else if (this.description != o.description)
             return false
-        if (this.likes == null) {
-            if (o.likes != null)
-                return false
-        }
-        else if (this.likes != o.likes)
-            return false
         if (this.createdAt == null) {
             if (o.createdAt != null)
                 return false
@@ -118,7 +111,6 @@ data class Mark(
         result = prime * result + (if (this.longitude == null) 0 else this.longitude.hashCode())
         result = prime * result + (if (this.name == null) 0 else this.name.hashCode())
         result = prime * result + (if (this.description == null) 0 else this.description.hashCode())
-        result = prime * result + (if (this.likes == null) 0 else this.likes.hashCode())
         result = prime * result + (if (this.createdAt == null) 0 else this.createdAt.hashCode())
         result = prime * result + (if (this.updatedAt == null) 0 else this.updatedAt.hashCode())
         return result
@@ -133,7 +125,6 @@ data class Mark(
         sb.append(", ").append(longitude)
         sb.append(", ").append(name)
         sb.append(", ").append(description)
-        sb.append(", ").append(likes)
         sb.append(", ").append(createdAt)
         sb.append(", ").append(updatedAt)
 

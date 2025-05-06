@@ -27,7 +27,7 @@ class MarkController(
 
     @GetMapping("/main")
     fun getMarksMainInfo(): ResponseEntity<List<MarkResponse>> {
-        val response = markDataService.getAll().map { mark -> mark.toMarkResponse() }
+        val response = markDataService.getAll().map { mark -> mark.toMarkResponse(null) }
         return ResponseEntity.ok(response)
     }
 
@@ -40,7 +40,8 @@ class MarkController(
             contentType = MediaType.APPLICATION_JSON
             setContentDispositionFormData("metadata", null)
         }
-        body.add("metadata", HttpEntity(markData.mark, jsonHeaders))
+        val authorName = markData.author.name
+        body.add("metadata", HttpEntity(markData.mark.toMarkResponse(authorName), jsonHeaders))
 
         markData.videos.forEach { fileContainer ->
             val bytes = requireNotNull(fileContainer.bytes)
@@ -82,7 +83,7 @@ class MarkController(
         var mark = markRequest.toMark(requireNotNull(userId))
         mark = markDataService.create(mark, photos, videos)
 
-        val response = mark.toMarkResponse()
+        val response = mark.toMarkResponse(userCredentials.user.name)
         return ResponseEntity.ok(response)
     }
 
@@ -94,9 +95,10 @@ class MarkController(
         description = description,
     )
 
-    fun Mark.toMarkResponse() = MarkResponse(
+    fun Mark.toMarkResponse(authorName: String?) = MarkResponse(
         id = requireNotNull(id),
-        userId = requireNotNull(userId),
+        authorId = requireNotNull(userId),
+        authorName = authorName,
         latitude = requireNotNull(latitude),
         longitude = requireNotNull(longitude),
         name = requireNotNull(name),

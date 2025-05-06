@@ -49,6 +49,11 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     val FILE_DATA: org.soneech.photomap.`data`.jooq.generated.tables.FileData get() = org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA
 
     /**
+     * The table <code>LIKES</code>.
+     */
+    val LIKES: org.soneech.photomap.`data`.jooq.generated.tables.Likes get() = org.soneech.photomap.`data`.jooq.generated.tables.Likes.LIKES
+
+    /**
      * The table <code>MARK</code>.
      */
     val MARK: org.soneech.photomap.`data`.jooq.generated.tables.Mark get() = org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK
@@ -79,6 +84,7 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
         org.soneech.photomap.`data`.jooq.generated.tables.Category.CATEGORY,
         org.soneech.photomap.`data`.jooq.generated.tables.Comment.COMMENT,
         org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA,
+        org.soneech.photomap.`data`.jooq.generated.tables.Likes.LIKES,
         org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK,
         org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY,
         org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG,

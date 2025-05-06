@@ -22,6 +22,11 @@ val COMMENT: org.soneech.photomap.`data`.jooq.generated.tables.Comment = org.son
 val FILE_DATA: org.soneech.photomap.`data`.jooq.generated.tables.FileData = org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA
 
 /**
+ * The table <code>LIKES</code>.
+ */
+val LIKES: org.soneech.photomap.`data`.jooq.generated.tables.Likes = org.soneech.photomap.`data`.jooq.generated.tables.Likes.LIKES
+
+/**
  * The table <code>MARK</code>.
  */
 val MARK: org.soneech.photomap.`data`.jooq.generated.tables.Mark = org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK

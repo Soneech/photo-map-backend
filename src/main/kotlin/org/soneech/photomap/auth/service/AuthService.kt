@@ -25,6 +25,7 @@ class AuthService(
 ) {
 
     fun authenticate(request: AuthRequest): AuthUserResponse {
+        val user = usersDataService.getByEmail(request.email)
         val token = UsernamePasswordAuthenticationToken(
             request.email,
             request.password
@@ -39,7 +40,7 @@ class AuthService(
         }
 
         val jwt = jwtUtil.generateToken(request.email)
-        return AuthUserResponse(jwt)
+        return AuthUserResponse(requireNotNull(user.id), jwt)
     }
 
     fun register(request: RegistrationRequest): RegisteredUserResponse {

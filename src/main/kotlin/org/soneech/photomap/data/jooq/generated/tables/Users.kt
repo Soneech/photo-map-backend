@@ -160,6 +160,21 @@ open class Users(
     val comment: org.soneech.photomap.`data`.jooq.generated.tables.Comment.CommentPath
         get(): org.soneech.photomap.`data`.jooq.generated.tables.Comment.CommentPath = comment()
 
+    private lateinit var _likes: org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath
+
+    /**
+     * Get the implicit to-many join path to the <code>LIKES</code> table
+     */
+    fun likes(): org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath {
+        if (!this::_likes.isInitialized)
+            _likes = org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_LIKES_USER.inverseKey)
+
+        return _likes;
+    }
+
+    val likes: org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath
+        get(): org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath = likes()
+
     private lateinit var _mark: org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath
 
     /**

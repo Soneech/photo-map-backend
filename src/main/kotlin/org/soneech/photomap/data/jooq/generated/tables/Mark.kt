@@ -112,11 +112,6 @@ open class Mark(
     val DESCRIPTION: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, String?> = createField(DSL.name("DESCRIPTION"), SQLDataType.VARCHAR(1000000000), this, "")
 
     /**
-     * The column <code>MARK.LIKES</code>.
-     */
-    val LIKES: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = createField(DSL.name("LIKES"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field(DSL.raw("0"), SQLDataType.BIGINT)), this, "")
-
-    /**
      * The column <code>MARK.CREATED_AT</code>.
      */
     val CREATED_AT: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, LocalDateTime?> = createField(DSL.name("CREATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("LOCALTIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "")
@@ -213,6 +208,21 @@ open class Mark(
 
     val fileData: org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath
         get(): org.soneech.photomap.`data`.jooq.generated.tables.FileData.FileDataPath = fileData()
+
+    private lateinit var _likes: org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath
+
+    /**
+     * Get the implicit to-many join path to the <code>LIKES</code> table
+     */
+    fun likes(): org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath {
+        if (!this::_likes.isInitialized)
+            _likes = org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_LIKES_MARK.inverseKey)
+
+        return _likes;
+    }
+
+    val likes: org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath
+        get(): org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath = likes()
 
     private lateinit var _markCategory: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath
 
