@@ -7,7 +7,7 @@ import org.soneech.photomap.data.jooq.exception.CreationException
 import org.soneech.photomap.data.jooq.exception.NotFoundException
 import org.soneech.photomap.data.jooq.generated.tables.pojos.FileData
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Mark
-import org.soneech.photomap.data.jooq.service.UsersDataService
+import org.soneech.photomap.profiles.service.UsersDataService
 import org.soneech.photomap.marks.model.FileContainer
 import org.soneech.photomap.marks.model.MarkFullData
 import org.soneech.photomap.marks.repository.FileDataRepository

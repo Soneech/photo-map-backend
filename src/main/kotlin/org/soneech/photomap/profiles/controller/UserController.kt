@@ -3,7 +3,7 @@ package org.soneech.photomap.profiles.controller
 import org.soneech.photomap.auth.model.Roles
 import org.soneech.photomap.auth.model.UserCredentials
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Users
-import org.soneech.photomap.data.jooq.service.UsersDataService
+import org.soneech.photomap.profiles.service.UsersDataService
 import org.soneech.photomap.profiles.dto.response.profiles.UserDataResponse
 import org.soneech.photomap.profiles.dto.response.profiles.UserPrivateDataResponse
 import org.soneech.photomap.profiles.dto.response.profiles.UserPublicDataResponse

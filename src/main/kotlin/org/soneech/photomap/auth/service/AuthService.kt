@@ -9,7 +9,7 @@ import org.soneech.photomap.auth.exception.AuthProcessException
 import org.soneech.photomap.auth.jwt.JwtUtil
 import org.soneech.photomap.auth.model.Roles
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Users
-import org.soneech.photomap.data.jooq.service.UsersDataService
+import org.soneech.photomap.profiles.service.UsersDataService
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

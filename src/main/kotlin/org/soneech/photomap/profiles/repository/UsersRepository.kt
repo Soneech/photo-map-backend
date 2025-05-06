@@ -1,4 +1,4 @@
-package org.soneech.photomap.data.jooq.repository
+package org.soneech.photomap.profiles.repository
 
 import org.jooq.DSLContext
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Users

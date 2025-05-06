@@ -1,7 +1,7 @@
 package org.soneech.photomap.auth.service
 
 import org.soneech.photomap.auth.model.UserCredentials
-import org.soneech.photomap.data.jooq.service.UsersDataService
+import org.soneech.photomap.profiles.service.UsersDataService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service

@@ -40,7 +40,13 @@ class SecurityConfig(
             .authorizeHttpRequests { requests ->
                 requests
                     .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/marks/**", "/users", "/marks", "/likes/**").permitAll()
+                    .requestMatchers(
+                        HttpMethod.GET,
+                        "/marks/**",
+                        "/users",
+                        "/marks",
+                        "/likes/**",
+                        "/comments/**").permitAll()
                     .anyRequest().hasAnyRole("USER", "ADMIN")
             }
             .formLogin { login ->

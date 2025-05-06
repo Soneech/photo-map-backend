@@ -1,9 +1,9 @@
-package org.soneech.photomap.data.jooq.service
+package org.soneech.photomap.profiles.service
 
 import org.soneech.photomap.data.jooq.exception.CreationException
 import org.soneech.photomap.data.jooq.exception.NotFoundException
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Users
-import org.soneech.photomap.data.jooq.repository.UsersRepository
+import org.soneech.photomap.profiles.repository.UsersRepository
 import org.springframework.stereotype.Service
 
 @Service
