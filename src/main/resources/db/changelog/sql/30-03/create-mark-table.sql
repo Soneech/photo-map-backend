@@ -7,8 +7,11 @@ CREATE TABLE Mark (
     longitude NUMERIC(9,6) NOT NULL CHECK (longitude BETWEEN -180 AND 180),
     name VARCHAR(255) NOT NULL,
     description TEXT,
+    category_id BIGINT NOT NULL DEFAULT 14,
     likes BIGINT NOT NULL DEFAULT 0,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     updated_at TIMESTAMP NOT NULL DEFAULT now(),
-    CONSTRAINT fk_mark_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+
+    CONSTRAINT fk_mark_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES Category(id) ON DELETE SET DEFAULT
 );

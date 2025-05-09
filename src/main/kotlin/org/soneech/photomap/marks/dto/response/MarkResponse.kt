@@ -9,6 +9,8 @@ data class MarkResponse(
     val authorName: String?,
     val latitude: BigDecimal,
     val longitude: BigDecimal,
+    val categoryId: Long?,
+    val categoryName: String?,
     val name: String,
     val description: String?,
     val createdAt: LocalDateTime,

@@ -4,6 +4,7 @@ import jakarta.validation.Valid
 import org.soneech.photomap.auth.model.UserCredentials
 import org.soneech.photomap.auth.util.extension.getFieldsErrors
 import org.soneech.photomap.common.exception.BadRequestException
+import org.soneech.photomap.data.jooq.generated.tables.pojos.Category
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Mark
 import org.soneech.photomap.marks.dto.request.MarkRequest
 import org.soneech.photomap.marks.dto.response.MarkResponse
@@ -27,7 +28,7 @@ class MarkController(
 
     @GetMapping("/main")
     fun getMarksMainInfo(): ResponseEntity<List<MarkResponse>> {
-        val response = markDataService.getAll().map { mark -> mark.toMarkResponse(null) }
+        val response = markDataService.getAll().map { mark -> mark.toMarkResponse() }
         return ResponseEntity.ok(response)
     }
 
@@ -41,7 +42,9 @@ class MarkController(
             setContentDispositionFormData("metadata", null)
         }
         val authorName = markData.author.name
-        body.add("metadata", HttpEntity(markData.mark.toMarkResponse(authorName), jsonHeaders))
+        val category = markData.category
+        val entity = HttpEntity(markData.mark.toMarkResponse(authorName, category.id, category.name), jsonHeaders)
+        body.add("metadata", entity)
 
         markData.videos.forEach { fileContainer ->
             val bytes = requireNotNull(fileContainer.bytes)
@@ -83,7 +86,7 @@ class MarkController(
         var mark = markRequest.toMark(requireNotNull(userId))
         mark = markDataService.create(mark, photos, videos)
 
-        val response = mark.toMarkResponse(userCredentials.user.name)
+        val response = mark.toMarkResponse(userCredentials.user.name, )
         return ResponseEntity.ok(response)
     }
 
@@ -93,14 +96,21 @@ class MarkController(
         longitude = longitude,
         name = name,
         description = description,
+        categoryId = categoryId.toLong()
     )
 
-    fun Mark.toMarkResponse(authorName: String?) = MarkResponse(
+    fun Mark.toMarkResponse(
+        authorName: String? = null,
+        categoryId: Long? = null,
+        categoryName: String? = null,
+    ) = MarkResponse(
         id = requireNotNull(id),
         authorId = requireNotNull(userId),
         authorName = authorName,
         latitude = requireNotNull(latitude),
         longitude = requireNotNull(longitude),
+        categoryId = categoryId,
+        categoryName = categoryName,
         name = requireNotNull(name),
         description = requireNotNull(description),
         createdAt = requireNotNull(createdAt),

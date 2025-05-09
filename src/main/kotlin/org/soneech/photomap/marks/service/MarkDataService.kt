@@ -22,6 +22,7 @@ class MarkDataService (
     private val markRepository: MarkRepository,
     private val fileDataRepository: FileDataRepository,
     private val usersDataService: UsersDataService,
+    private val categoryService: CategoryService,
     private val filesClient: FilesClient,
     private val aws: AwsProperties,
 ){
@@ -31,12 +32,14 @@ class MarkDataService (
         val mark = getById(id)
         val filesData = fileDataRepository.getAllByMarkId(id)
         val author = usersDataService.getById(requireNotNull(mark.userId))
+        val category = categoryService.getById(requireNotNull(mark.categoryId))
 
         val markFullData: MarkFullData = if (filesData.isNotEmpty()) {
             val files = filesClient.downloadFiles(filesData)
             MarkFullData(
                 author = author,
                 mark = mark,
+                category = category,
                 photos = files.first,
                 videos = files.second,
             )
@@ -44,6 +47,7 @@ class MarkDataService (
             MarkFullData(
                 author = author,
                 mark = mark,
+                category = category,
             )
         }
 

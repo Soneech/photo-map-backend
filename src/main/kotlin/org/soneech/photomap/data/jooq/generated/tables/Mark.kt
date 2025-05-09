@@ -112,6 +112,11 @@ open class Mark(
     val DESCRIPTION: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, String?> = createField(DSL.name("DESCRIPTION"), SQLDataType.VARCHAR(1000000000), this, "")
 
     /**
+     * The column <code>MARK.CATEGORY_ID</code>.
+     */
+    val CATEGORY_ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = createField(DSL.name("CATEGORY_ID"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field(DSL.raw("1"), SQLDataType.BIGINT)), this, "")
+
+    /**
      * The column <code>MARK.CREATED_AT</code>.
      */
     val CREATED_AT: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, LocalDateTime?> = createField(DSL.name("CREATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("LOCALTIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "")
@@ -162,7 +167,22 @@ open class Mark(
     override fun getSchema(): Schema? = if (aliased()) null else org.soneech.photomap.`data`.jooq.generated.DefaultSchema.DEFAULT_SCHEMA
     override fun getIdentity(): Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = super.getIdentity() as Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?>
     override fun getPrimaryKey(): UniqueKey<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord> = org.soneech.photomap.`data`.jooq.generated.keys.CONSTRAINT_2
-    override fun getReferences(): List<ForeignKey<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, *>> = listOf(org.soneech.photomap.`data`.jooq.generated.keys.FK_MARK_USER)
+    override fun getReferences(): List<ForeignKey<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, *>> = listOf(org.soneech.photomap.`data`.jooq.generated.keys.FK_CATEGORY, org.soneech.photomap.`data`.jooq.generated.keys.FK_MARK_USER)
+
+    private lateinit var _category: org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath
+
+    /**
+     * Get the implicit join path to the <code>CATEGORY</code> table.
+     */
+    fun category(): org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath {
+        if (!this::_category.isInitialized)
+            _category = org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath(this, org.soneech.photomap.`data`.jooq.generated.keys.FK_CATEGORY, null)
+
+        return _category;
+    }
+
+    val category: org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath
+        get(): org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath = category()
 
     private lateinit var _users: org.soneech.photomap.`data`.jooq.generated.tables.Users.UsersPath
 
@@ -223,50 +243,6 @@ open class Mark(
 
     val likes: org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath
         get(): org.soneech.photomap.`data`.jooq.generated.tables.Likes.LikesPath = likes()
-
-    private lateinit var _markCategory: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath
-
-    /**
-     * Get the implicit to-many join path to the <code>MARK_CATEGORY</code>
-     * table
-     */
-    fun markCategory(): org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath {
-        if (!this::_markCategory.isInitialized)
-            _markCategory = org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_MARK_CATEGORY_MARK.inverseKey)
-
-        return _markCategory;
-    }
-
-    val markCategory: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath = markCategory()
-
-    private lateinit var _markTag: org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MarkTagPath
-
-    /**
-     * Get the implicit to-many join path to the <code>MARK_TAG</code> table
-     */
-    fun markTag(): org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MarkTagPath {
-        if (!this::_markTag.isInitialized)
-            _markTag = org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MarkTagPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_MARK_TAG_MARK.inverseKey)
-
-        return _markTag;
-    }
-
-    val markTag: org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MarkTagPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MarkTagPath = markTag()
-
-    /**
-     * Get the implicit many-to-many join path to the <code>CATEGORY</code>
-     * table
-     */
-    val category: org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.Category.CategoryPath = markCategory().category()
-
-    /**
-     * Get the implicit many-to-many join path to the <code>TAG</code> table
-     */
-    val tag: org.soneech.photomap.`data`.jooq.generated.tables.Tag.TagPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.Tag.TagPath = markTag().tag()
     override fun getChecks(): List<Check<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord>> = listOf(
         Internal.createCheck(this, DSL.name("CONSTRAINT_23"), "\"LATITUDE\" BETWEEN -90 AND 90", true),
         Internal.createCheck(this, DSL.name("CONSTRAINT_23F"), "\"LONGITUDE\" BETWEEN -180 AND 180", true)

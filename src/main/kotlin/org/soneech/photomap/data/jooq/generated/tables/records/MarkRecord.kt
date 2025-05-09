@@ -66,15 +66,20 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
     @Nullable
         get(): String? = get(5) as String?
 
-    open var createdAt: LocalDateTime?
+    open var categoryId: Long?
         set(value): Unit = set(6, value)
     @Nullable
-        get(): LocalDateTime? = get(6) as LocalDateTime?
+        get(): Long? = get(6) as Long?
 
-    open var updatedAt: LocalDateTime?
+    open var createdAt: LocalDateTime?
         set(value): Unit = set(7, value)
     @Nullable
         get(): LocalDateTime? = get(7) as LocalDateTime?
+
+    open var updatedAt: LocalDateTime?
+        set(value): Unit = set(8, value)
+    @Nullable
+        get(): LocalDateTime? = get(8) as LocalDateTime?
 
     // -------------------------------------------------------------------------
     // Primary key information
@@ -85,13 +90,14 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
     /**
      * Create a detached, initialised MarkRecord
      */
-    constructor(id: Long? = null, userId: Long? = null, latitude: BigDecimal? = null, longitude: BigDecimal? = null, name: String? = null, description: String? = null, createdAt: LocalDateTime? = null, updatedAt: LocalDateTime? = null): this() {
+    constructor(id: Long? = null, userId: Long? = null, latitude: BigDecimal? = null, longitude: BigDecimal? = null, name: String? = null, description: String? = null, categoryId: Long? = null, createdAt: LocalDateTime? = null, updatedAt: LocalDateTime? = null): this() {
         this.id = id
         this.userId = userId
         this.latitude = latitude
         this.longitude = longitude
         this.name = name
         this.description = description
+        this.categoryId = categoryId
         this.createdAt = createdAt
         this.updatedAt = updatedAt
         resetChangedOnNotNull()
@@ -108,6 +114,7 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
             this.longitude = value.longitude
             this.name = value.name
             this.description = value.description
+            this.categoryId = value.categoryId
             this.createdAt = value.createdAt
             this.updatedAt = value.updatedAt
             resetChangedOnNotNull()

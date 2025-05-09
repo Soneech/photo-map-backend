@@ -32,21 +32,6 @@ val LIKES: org.soneech.photomap.`data`.jooq.generated.tables.Likes = org.soneech
 val MARK: org.soneech.photomap.`data`.jooq.generated.tables.Mark = org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK
 
 /**
- * The table <code>MARK_CATEGORY</code>.
- */
-val MARK_CATEGORY: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory = org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY
-
-/**
- * The table <code>MARK_TAG</code>.
- */
-val MARK_TAG: org.soneech.photomap.`data`.jooq.generated.tables.MarkTag = org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG
-
-/**
- * The table <code>TAG</code>.
- */
-val TAG: org.soneech.photomap.`data`.jooq.generated.tables.Tag = org.soneech.photomap.`data`.jooq.generated.tables.Tag.TAG
-
-/**
  * The table <code>USERS</code>.
  */
 val USERS: org.soneech.photomap.`data`.jooq.generated.tables.Users = org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS

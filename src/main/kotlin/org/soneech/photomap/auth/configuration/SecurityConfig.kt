@@ -46,7 +46,9 @@ class SecurityConfig(
                         "/users",
                         "/marks",
                         "/likes/**",
-                        "/comments/**").permitAll()
+                        "/comments/**",
+                        "/categories",
+                        "/categories/**").permitAll()
                     .anyRequest().hasAnyRole("USER", "ADMIN")
             }
             .formLogin { login ->

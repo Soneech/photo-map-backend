@@ -128,27 +128,20 @@ open class Category(
     override fun getIdentity(): Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.CategoryRecord, Long?> = super.getIdentity() as Identity<org.soneech.photomap.`data`.jooq.generated.tables.records.CategoryRecord, Long?>
     override fun getPrimaryKey(): UniqueKey<org.soneech.photomap.`data`.jooq.generated.tables.records.CategoryRecord> = org.soneech.photomap.`data`.jooq.generated.keys.CONSTRAINT_3
 
-    private lateinit var _markCategory: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath
+    private lateinit var _mark: org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath
 
     /**
-     * Get the implicit to-many join path to the <code>MARK_CATEGORY</code>
-     * table
+     * Get the implicit to-many join path to the <code>MARK</code> table
      */
-    fun markCategory(): org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath {
-        if (!this::_markCategory.isInitialized)
-            _markCategory = org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_MARK_CATEGORY_CATEGORY.inverseKey)
+    fun mark(): org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath {
+        if (!this::_mark.isInitialized)
+            _mark = org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath(this, null, org.soneech.photomap.`data`.jooq.generated.keys.FK_CATEGORY.inverseKey)
 
-        return _markCategory;
+        return _mark;
     }
 
-    val markCategory: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MarkCategoryPath = markCategory()
-
-    /**
-     * Get the implicit many-to-many join path to the <code>MARK</code> table
-     */
     val mark: org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath
-        get(): org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath = markCategory().mark()
+        get(): org.soneech.photomap.`data`.jooq.generated.tables.Mark.MarkPath = mark()
     override fun `as`(alias: String): Category = Category(DSL.name(alias), this)
     override fun `as`(alias: Name): Category = Category(alias, this)
     override fun `as`(alias: Table<*>): Category = Category(alias.qualifiedName, this)

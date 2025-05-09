@@ -59,21 +59,6 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
     val MARK: org.soneech.photomap.`data`.jooq.generated.tables.Mark get() = org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK
 
     /**
-     * The table <code>MARK_CATEGORY</code>.
-     */
-    val MARK_CATEGORY: org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory get() = org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY
-
-    /**
-     * The table <code>MARK_TAG</code>.
-     */
-    val MARK_TAG: org.soneech.photomap.`data`.jooq.generated.tables.MarkTag get() = org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG
-
-    /**
-     * The table <code>TAG</code>.
-     */
-    val TAG: org.soneech.photomap.`data`.jooq.generated.tables.Tag get() = org.soneech.photomap.`data`.jooq.generated.tables.Tag.TAG
-
-    /**
      * The table <code>USERS</code>.
      */
     val USERS: org.soneech.photomap.`data`.jooq.generated.tables.Users get() = org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS
@@ -86,9 +71,6 @@ open class DefaultSchema : SchemaImpl("", org.soneech.photomap.`data`.jooq.gener
         org.soneech.photomap.`data`.jooq.generated.tables.FileData.FILE_DATA,
         org.soneech.photomap.`data`.jooq.generated.tables.Likes.LIKES,
         org.soneech.photomap.`data`.jooq.generated.tables.Mark.MARK,
-        org.soneech.photomap.`data`.jooq.generated.tables.MarkCategory.MARK_CATEGORY,
-        org.soneech.photomap.`data`.jooq.generated.tables.MarkTag.MARK_TAG,
-        org.soneech.photomap.`data`.jooq.generated.tables.Tag.TAG,
         org.soneech.photomap.`data`.jooq.generated.tables.Users.USERS
     )
 }

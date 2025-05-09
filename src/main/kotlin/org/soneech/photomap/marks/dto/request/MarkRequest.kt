@@ -17,4 +17,6 @@ data class MarkRequest(
     val name: String,
 
     val description: String?,
+
+    val categoryId: String,
 )
