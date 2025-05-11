@@ -4,7 +4,6 @@ import jakarta.validation.Valid
 import org.soneech.photomap.auth.model.UserCredentials
 import org.soneech.photomap.auth.util.extension.getFieldsErrors
 import org.soneech.photomap.common.exception.BadRequestException
-import org.soneech.photomap.data.jooq.generated.tables.pojos.Category
 import org.soneech.photomap.data.jooq.generated.tables.pojos.Mark
 import org.soneech.photomap.marks.dto.request.MarkRequest
 import org.soneech.photomap.marks.dto.response.MarkResponse
@@ -43,7 +42,7 @@ class MarkController(
         }
         val authorName = markData.author.name
         val category = markData.category
-        val entity = HttpEntity(markData.mark.toMarkResponse(authorName, category.id, category.name), jsonHeaders)
+        val entity = HttpEntity(markData.mark.toMarkResponse(authorName, category.name), jsonHeaders)
         body.add("metadata", entity)
 
         markData.videos.forEach { fileContainer ->
@@ -86,7 +85,7 @@ class MarkController(
         var mark = markRequest.toMark(requireNotNull(userId))
         mark = markDataService.create(mark, photos, videos)
 
-        val response = mark.toMarkResponse(userCredentials.user.name, )
+        val response = mark.toMarkResponse(userCredentials.user.name)
         return ResponseEntity.ok(response)
     }
 
@@ -101,7 +100,6 @@ class MarkController(
 
     fun Mark.toMarkResponse(
         authorName: String? = null,
-        categoryId: Long? = null,
         categoryName: String? = null,
     ) = MarkResponse(
         id = requireNotNull(id),
