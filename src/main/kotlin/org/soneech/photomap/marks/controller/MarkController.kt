@@ -95,7 +95,8 @@ class MarkController(
         longitude = longitude,
         name = name,
         description = description,
-        categoryId = categoryId.toLong()
+        categoryId = categoryId.toLong(),
+        isPrivate = isPrivate,
     )
 
     fun Mark.toMarkResponse(
@@ -112,5 +113,6 @@ class MarkController(
         name = requireNotNull(name),
         description = requireNotNull(description),
         createdAt = requireNotNull(createdAt),
+        isPrivate = requireNotNull(isPrivate),
     )
 }

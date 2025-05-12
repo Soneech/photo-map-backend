@@ -1,0 +1,12 @@
+BEGIN;
+
+ALTER TABLE Mark
+    ADD COLUMN is_private BOOLEAN DEFAULT FALSE;
+
+UPDATE Mark
+    SET is_private = FALSE;
+
+ALTER TABLE Mark
+    ALTER COLUMN is_private SET NOT NULL;
+
+COMMIT;

@@ -114,7 +114,7 @@ open class Mark(
     /**
      * The column <code>MARK.CATEGORY_ID</code>.
      */
-    val CATEGORY_ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = createField(DSL.name("CATEGORY_ID"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field(DSL.raw("1"), SQLDataType.BIGINT)), this, "")
+    val CATEGORY_ID: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Long?> = createField(DSL.name("CATEGORY_ID"), SQLDataType.BIGINT.nullable(false).defaultValue(DSL.field(DSL.raw("14"), SQLDataType.BIGINT)), this, "")
 
     /**
      * The column <code>MARK.CREATED_AT</code>.
@@ -125,6 +125,11 @@ open class Mark(
      * The column <code>MARK.UPDATED_AT</code>.
      */
     val UPDATED_AT: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, LocalDateTime?> = createField(DSL.name("UPDATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("LOCALTIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "")
+
+    /**
+     * The column <code>MARK.IS_PRIVATE</code>.
+     */
+    val IS_PRIVATE: TableField<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord, Boolean?> = createField(DSL.name("IS_PRIVATE"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field(DSL.raw("FALSE"), SQLDataType.BOOLEAN)), this, "")
 
     private constructor(alias: Name, aliased: Table<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord>?): this(alias, null, null, null, aliased, null, null)
     private constructor(alias: Name, aliased: Table<org.soneech.photomap.`data`.jooq.generated.tables.records.MarkRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, null, aliased, parameters, null)

@@ -40,7 +40,10 @@ data class Mark(
     var description: String? = null,
     var categoryId: Long? = null,
     var createdAt: LocalDateTime? = null,
-    var updatedAt: LocalDateTime? = null
+    var updatedAt: LocalDateTime? = null,
+    @Suppress("INAPPLICABLE_JVM_NAME")
+    @set:JvmName("setIsPrivate")
+    var isPrivate: Boolean? = null
 ): Serializable {
 
 
@@ -106,6 +109,12 @@ data class Mark(
         }
         else if (this.updatedAt != o.updatedAt)
             return false
+        if (this.isPrivate == null) {
+            if (o.isPrivate != null)
+                return false
+        }
+        else if (this.isPrivate != o.isPrivate)
+            return false
         return true
     }
 
@@ -121,6 +130,7 @@ data class Mark(
         result = prime * result + (if (this.categoryId == null) 0 else this.categoryId.hashCode())
         result = prime * result + (if (this.createdAt == null) 0 else this.createdAt.hashCode())
         result = prime * result + (if (this.updatedAt == null) 0 else this.updatedAt.hashCode())
+        result = prime * result + (if (this.isPrivate == null) 0 else this.isPrivate.hashCode())
         return result
     }
 
@@ -136,6 +146,7 @@ data class Mark(
         sb.append(", ").append(categoryId)
         sb.append(", ").append(createdAt)
         sb.append(", ").append(updatedAt)
+        sb.append(", ").append(isPrivate)
 
         sb.append(")")
         return sb.toString()

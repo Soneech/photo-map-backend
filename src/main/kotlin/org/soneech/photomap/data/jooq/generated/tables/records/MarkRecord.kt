@@ -81,6 +81,13 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
     @Nullable
         get(): LocalDateTime? = get(8) as LocalDateTime?
 
+    @Suppress("INAPPLICABLE_JVM_NAME")
+    @set:JvmName("setIsPrivate")
+    open var isPrivate: Boolean?
+        set(value): Unit = set(9, value)
+    @Nullable
+        get(): Boolean? = get(9) as Boolean?
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -90,7 +97,7 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
     /**
      * Create a detached, initialised MarkRecord
      */
-    constructor(id: Long? = null, userId: Long? = null, latitude: BigDecimal? = null, longitude: BigDecimal? = null, name: String? = null, description: String? = null, categoryId: Long? = null, createdAt: LocalDateTime? = null, updatedAt: LocalDateTime? = null): this() {
+    constructor(id: Long? = null, userId: Long? = null, latitude: BigDecimal? = null, longitude: BigDecimal? = null, name: String? = null, description: String? = null, categoryId: Long? = null, createdAt: LocalDateTime? = null, updatedAt: LocalDateTime? = null, isPrivate: Boolean? = null): this() {
         this.id = id
         this.userId = userId
         this.latitude = latitude
@@ -100,6 +107,7 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
         this.categoryId = categoryId
         this.createdAt = createdAt
         this.updatedAt = updatedAt
+        this.isPrivate = isPrivate
         resetChangedOnNotNull()
     }
 
@@ -117,6 +125,7 @@ open class MarkRecord() : UpdatableRecordImpl<MarkRecord>(org.soneech.photomap.`
             this.categoryId = value.categoryId
             this.createdAt = value.createdAt
             this.updatedAt = value.updatedAt
+            this.isPrivate = value.isPrivate
             resetChangedOnNotNull()
         }
     }

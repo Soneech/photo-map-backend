@@ -19,4 +19,6 @@ data class MarkRequest(
     val description: String?,
 
     val categoryId: String,
+
+    val isPrivate: Boolean,
 )

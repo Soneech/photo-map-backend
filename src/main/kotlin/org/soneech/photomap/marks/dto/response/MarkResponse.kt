@@ -15,4 +15,5 @@ data class MarkResponse(
     val description: String?,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime? = null,
+    val isPrivate: Boolean,
 )

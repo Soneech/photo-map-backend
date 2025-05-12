@@ -82,3 +82,17 @@ databaseChangeLog:
       changes:
         - tagDatabase:
             tag: v1.0.5
+
+  - changeSet:
+      id: add-is-private-column-for-mark
+      author: Soneech
+      changes:
+        - sqlFile:
+            path: sql/12-05/add-is-private-column-for-mark.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: add-tag-1.0.6
+      author: Soneech
+      changes:
+        - tagDatabase:
+            tag: v1.0.6
